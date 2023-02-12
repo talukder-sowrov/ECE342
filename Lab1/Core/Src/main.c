@@ -53,7 +53,32 @@ int main(void)
   /* Infinite loop */
   while (1)
   {
-    HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
-    HAL_Delay(500);
+		int i;
+		
+		for(i=0; i<4; i++){
+			if (i==0){
+				HAL_GPIO_WritePin(ROW0_GPIO_Port, ROW0_Pin, GPIO_PIN_SET);
+				HAL_Delay(50);
+				HAL_GPIO_WritePin(ROW0_GPIO_Port, ROW0_Pin, GPIO_PIN_RESET);
+			}
+			else if (i==1){
+				HAL_GPIO_WritePin(ROW1_GPIO_Port, ROW1_Pin, GPIO_PIN_SET);
+				HAL_Delay(50);
+				HAL_GPIO_WritePin(ROW1_GPIO_Port, ROW1_Pin, GPIO_PIN_RESET);
+			}
+			else if (i==2){
+				HAL_GPIO_WritePin(ROW2_GPIO_Port, ROW2_Pin, GPIO_PIN_SET);
+				HAL_Delay(20);
+				HAL_GPIO_WritePin(ROW2_GPIO_Port, ROW2_Pin, GPIO_PIN_RESET);
+			}
+			else if (i==3){
+				HAL_GPIO_WritePin(ROW3_GPIO_Port, ROW3_Pin, GPIO_PIN_SET);
+				HAL_Delay(50);
+				HAL_GPIO_WritePin(ROW3_GPIO_Port, ROW3_Pin, GPIO_PIN_RESET);
+			}
+			HAL_Delay(20);
+		}
+//    HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
+//    HAL_Delay(500);
   }
 }

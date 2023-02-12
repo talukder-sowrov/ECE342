@@ -20,6 +20,9 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "stm32f4xx_it.h"
+#include <stdio.h>
+#include "main.h"
+#include "config.h"
 
 /* External variables --------------------------------------------------------*/
 extern int8_t current_col;
@@ -167,7 +170,28 @@ void SysTick_Handler(void)
   */
 void EXTI4_IRQHandler(void)
 {
-  // Your code here
+  if (__HAL_GPIO_EXTI_GET_FLAG(COL0_Pin)) {
+		if(HAL_GPIO_ReadPin(ROW0_GPIO_Port, ROW0_Pin) == GPIO_PIN_SET){
+			char message[100];
+			sprintf(message, "3");
+			print_msg(message);
+		}
+		else if(HAL_GPIO_ReadPin(ROW1_GPIO_Port, ROW1_Pin) == GPIO_PIN_SET){
+			char message[100];
+			sprintf(message, "7");
+			print_msg(message);
+		}
+		else if(HAL_GPIO_ReadPin(ROW2_GPIO_Port, ROW2_Pin) == GPIO_PIN_SET){
+			char message[100];
+			sprintf(message, "B");
+			print_msg(message);
+		}
+		else if(HAL_GPIO_ReadPin(ROW3_GPIO_Port, ROW3_Pin) == GPIO_PIN_SET){
+			char message[100];
+			sprintf(message, "F");
+			print_msg(message);
+		}
+  }
 
   HAL_GPIO_EXTI_IRQHandler(COL0_Pin);
 }
@@ -177,9 +201,73 @@ void EXTI4_IRQHandler(void)
   */
 void EXTI9_5_IRQHandler(void)
 {
-  // Your code here
-
-  HAL_GPIO_EXTI_IRQHandler(COL1_Pin);
+		if (__HAL_GPIO_EXTI_GET_FLAG(COL1_Pin)) {
+			if(HAL_GPIO_ReadPin(ROW0_GPIO_Port, ROW0_Pin) == GPIO_PIN_SET){
+				char message[100];
+				sprintf(message, "2");
+				print_msg(message);
+			}
+			else if(HAL_GPIO_ReadPin(ROW1_GPIO_Port, ROW1_Pin) == GPIO_PIN_SET){
+				char message[100];
+				sprintf(message, "6");
+				print_msg(message);
+			}
+			else if(HAL_GPIO_ReadPin(ROW2_GPIO_Port, ROW2_Pin) == GPIO_PIN_SET){
+				char message[100];
+				sprintf(message, "A");
+				print_msg(message);
+			}
+			else if(HAL_GPIO_ReadPin(ROW3_GPIO_Port, ROW3_Pin) == GPIO_PIN_SET){
+				char message[100];
+				sprintf(message, "E");
+				print_msg(message);
+			}
+		}
+		else if (__HAL_GPIO_EXTI_GET_FLAG(COL2_Pin)) {
+			if(HAL_GPIO_ReadPin(ROW0_GPIO_Port, ROW0_Pin) == GPIO_PIN_SET){
+				char message[100];
+				sprintf(message, "1");
+				print_msg(message);
+			}
+			else if(HAL_GPIO_ReadPin(ROW1_GPIO_Port, ROW1_Pin) == GPIO_PIN_SET){
+				char message[100];
+				sprintf(message, "5");
+				print_msg(message);
+			}
+			else if(HAL_GPIO_ReadPin(ROW2_GPIO_Port, ROW2_Pin) == GPIO_PIN_SET){
+				char message[100];
+				sprintf(message, "9");
+				print_msg(message);
+			}
+			else if(HAL_GPIO_ReadPin(ROW3_GPIO_Port, ROW3_Pin) == GPIO_PIN_SET){
+				char message[100];
+				sprintf(message, "D");
+				print_msg(message);
+			}
+		}
+		if (__HAL_GPIO_EXTI_GET_FLAG(COL3_Pin)) {
+			if(HAL_GPIO_ReadPin(ROW0_GPIO_Port, ROW0_Pin) == GPIO_PIN_SET){
+				char message[100];
+				sprintf(message, "0");
+				print_msg(message);
+			}
+			else if(HAL_GPIO_ReadPin(ROW1_GPIO_Port, ROW1_Pin) == GPIO_PIN_SET){
+				char message[100];
+				sprintf(message, "4");
+				print_msg(message);
+			}
+			else if(HAL_GPIO_ReadPin(ROW2_GPIO_Port, ROW2_Pin) == GPIO_PIN_SET){
+				char message[100];
+				sprintf(message, "8");
+				print_msg(message);
+			}
+			else if(HAL_GPIO_ReadPin(ROW3_GPIO_Port, ROW3_Pin) == GPIO_PIN_SET){
+				char message[100];
+				sprintf(message, "C");
+				print_msg(message);
+			}
+		}
+	HAL_GPIO_EXTI_IRQHandler(COL1_Pin);
   HAL_GPIO_EXTI_IRQHandler(COL2_Pin);
   HAL_GPIO_EXTI_IRQHandler(COL3_Pin);
 }
@@ -190,7 +278,7 @@ void EXTI9_5_IRQHandler(void)
 void EXTI15_10_IRQHandler(void)
 {
   if (__HAL_GPIO_EXTI_GET_FLAG(USER_Btn_Pin)) {
-    // Your code here
+    HAL_GPIO_TogglePin(LD1_GPIO_Port, LD1_Pin);
   }
 
   HAL_GPIO_EXTI_IRQHandler(USER_Btn_Pin);
